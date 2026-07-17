@@ -1,0 +1,9 @@
+{
+    "name":"particle-academy/fancy-git-bitbucket","description":"Bitbucket Cloud adapter for particle-academy/fancy-git.","type":"library","license":"MIT",
+    "repositories":[{"type":"vcs","url":"https://github.com/Particle-Academy/fancy-git-php"}],
+    "require":{"php":"^8.3","particle-academy/fancy-git":"^0.1.0","guzzlehttp/guzzle":"^7.9"},
+    "require-dev":{"phpunit/phpunit":"^11.0|^12.0"},
+    "autoload":{"psr-4":{"FancyGit\\Bitbucket\\":"src/"}},"autoload-dev":{"psr-4":{"FancyGit\\Bitbucket\\Tests\\":"tests/"}},
+    "scripts":{"test":"phpunit"},"minimum-stability":"stable","prefer-stable":true,
+    "support":{"issues":"https://github.com/Particle-Academy/fancy-git-bitbucket-php/issues","source":"https://github.com/Particle-Academy/fancy-git-bitbucket-php"}
+}
