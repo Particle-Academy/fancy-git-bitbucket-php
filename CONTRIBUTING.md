@@ -8,13 +8,13 @@ works in this repo.
 ## Layout
 
 - `src/BitbucketProvider.php` — the whole adapter (namespace `FancyGit\Bitbucket`).
-- `tests/` — the PHPUnit suite.
+- `tests/` — the Pest suite.
 
 ## Commands
 
 ```bash
 composer install
-composer test   # phpunit
+composer test   # pest
 ```
 
 ## Changelog
