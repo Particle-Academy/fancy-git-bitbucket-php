@@ -16,6 +16,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CI: re-pin org third-party allowlist to 2614224
 - Tests moved to Pest (`^5.0`); `phpunit/phpunit` removed from require-dev (Pest brings it transitively). No runtime change.
 
+### Fixed
+
+- **`listReviews()`'s `nextCursor` is the page number.** It was the whole query
+  string of Bitbucket's `next` URL (`state=OPEN&page=2&pagelen=2`), which, fed
+  back as `cursor`, was sent as `page=state%3DOPEN...` and ended a walk early.
+  It is now the `page` value, as the TypeScript twin returns it. If you stored
+  cursors from earlier releases, start the walk again.
+- **Bitbucket's failures are `GitException`s with the fancy-git code.** They
+  were Guzzle exceptions with no code. Now 401/403 `auth`, 404 `not_found`,
+  400/422 `invalid_argument`, 405 `unsupported`, 409 `conflict`, 429
+  `rate_limited`, otherwise `unknown`, with the HTTP status as the exception
+  code and Bitbucket's own message in the text; a transport failure is
+  `unknown`. **If you caught `GuzzleHttp\Exception\ClientException` or
+  `ServerException` from this adapter, catch `FancyGit\Error\GitException`
+  instead.**
+- **A GET that answers 5xx is retried, at most twice** (100 ms then 200 ms
+  apart). A POST is never replayed. Found, with the two above, by the
+  fancy-labs git-adapter test.
+
 ## [0.2.0] — 2026-08-07
 
 ### Changed
